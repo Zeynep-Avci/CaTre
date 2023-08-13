@@ -30,11 +30,10 @@ fun HomeScreen(navController: NavController, viewModel: ToDoViewModel) {
     val checkedStates = viewModel.getCheckedStates()
     val currentTime = LocalTime.now()
 
-    // Calculate due times for each task
     val dueTimeBreakfast = currentTime.plusHours(7)
     val dueTimeLunch = currentTime.plusHours(12)
     val dueTimeDinner = currentTime.plusHours(19)
-    val dueTimeLitterBox = currentTime.plusHours(20)
+    val dueTimeLitterBox = currentTime.plusHours(5)
     val dueTimeBathing = currentTime.plusHours(10)
     val dueTimePlaying = currentTime.plusHours(15)
 

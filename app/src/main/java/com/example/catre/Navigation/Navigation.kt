@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.catre.Screens.BadgeScreen
 import com.example.catre.Screens.HomeScreen
 import com.example.catre.Screens.LevelScreen
 import com.example.catre.Screens.TaskScreen
@@ -29,6 +30,9 @@ fun Navigation(viewModel: ToDoViewModel){
 
         composable(route = AppScreens.TaskScreen.route) {
             TaskScreen(navController = navController, viewModel = viewModel)
+        }
+        composable(route = AppScreens.BadgeScreen.route) {
+            BadgeScreen(navController = navController, viewModel = viewModel)
         }
     }
 }

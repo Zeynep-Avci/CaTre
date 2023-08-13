@@ -166,6 +166,17 @@ fun LevelScreen(navController: NavController, viewModel: ToDoViewModel) {
                         navController.navigate(AppScreens.HomeScreen.route)
                     }
             )
+            Image(
+                painter = painterResource(id = R.drawable.rightarrow),
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp)
+                    .size(70.dp)
+                    .clickable {
+                        navController.navigate(AppScreens.BadgeScreen.route)
+                    }
+            )
         }
     }
 }
