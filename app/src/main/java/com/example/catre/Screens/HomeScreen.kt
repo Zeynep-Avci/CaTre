@@ -29,13 +29,14 @@ import java.time.LocalTime
 fun HomeScreen(navController: NavController, viewModel: ToDoViewModel) {
     val checkedStates = viewModel.getCheckedStates()
     val currentTime = LocalTime.now()
+    val midnight = LocalTime.MIDNIGHT
 
-    val dueTimeBreakfast = currentTime.plusHours(7)
-    val dueTimeLunch = currentTime.plusHours(12)
-    val dueTimeDinner = currentTime.plusHours(19)
-    val dueTimeLitterBox = currentTime.plusHours(5)
-    val dueTimeBathing = currentTime.plusHours(10)
-    val dueTimePlaying = currentTime.plusHours(15)
+    val dueTimeBreakfast = midnight.plusHours(7)
+    val dueTimeLunch = midnight.plusHours(12)
+    val dueTimeDinner = midnight.plusHours(19)
+    val dueTimeLitterBox = midnight.plusHours(23)
+    val dueTimeBathing = midnight.plusHours(10)
+    val dueTimePlaying = midnight.plusHours(15)
 
     val isBreakfastOverdue = !checkedStates[0] && currentTime.isAfter(dueTimeBreakfast)
     val isLunchOverdue = !checkedStates[1] && currentTime.isAfter(dueTimeLunch)

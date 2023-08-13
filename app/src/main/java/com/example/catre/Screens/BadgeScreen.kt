@@ -166,11 +166,11 @@ fun BadgeCard(badge: Badge, totalPoints: Int, cardSize: Dp) {
             )
             //Spacer(modifier = Modifier.height(0.dp))
             Text(
-                text = if (!isUnlocked) badge.task else badge.task,
+                text = badge.task,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
                 //fontWeight = FontWeight.Bold,
-                color = if (!isUnlocked) Color.Black else Color.White
+                //color = if (!isUnlocked) Color.Black else Color.White
             )
         }
     }
