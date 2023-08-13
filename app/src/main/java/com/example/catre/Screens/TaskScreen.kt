@@ -13,7 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,13 +56,40 @@ fun TaskScreen(navController: NavController, viewModel: ToDoViewModel) {
     Scaffold(topBar = {
         TopAppBar(
             title = {
-                Box(modifier = Modifier.fillMaxWidth()){
-                    Image(painterResource(
-                        id = R.drawable.textlogo), contentDescription = "MyLogo",
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Spacer(modifier = Modifier.weight(1f)) // Add spacer to center the logo
+                    Box(
                         modifier = Modifier
-                            .size(100.dp)
-                            .align(Alignment.Center)
-                    )
+                            .padding(end = 16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.textlogo),
+                            contentDescription = "MyLogo",
+                            modifier = Modifier
+                                .size(100.dp)
+                                .align(Alignment.Center)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(35.dp))
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = colorResource(id = R.color.barbar),
+                                shape = RoundedCornerShape(16.dp)
+                            )
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        Text(
+                            text = "Points: ${viewModel.points.value}",
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            color = Color.White,
+                            style = TextStyle(fontSize = 16.sp)
+                        )
+                    }
                 }
             },
             backgroundColor = Color.White
@@ -95,9 +124,14 @@ fun TaskScreen(navController: NavController, viewModel: ToDoViewModel) {
                             Checkbox(
                                 checked = checkedStates[index],
                                 onCheckedChange = { newValue ->
-                                    viewModel.updateCheckedStates(checkedStates.mapIndexed { i, currentState ->
-                                        if (i == index) newValue else currentState
-                                    })
+                                    val newCheckedStates = checkedStates.toMutableList()
+                                    newCheckedStates[index] = newValue
+                                    viewModel.updateCheckedStates(newCheckedStates)
+                                    if (newValue) {
+                                        viewModel.incrementPoints()
+                                    } else {
+                                        viewModel.decrementPoints()
+                                    }
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = Color.Green,

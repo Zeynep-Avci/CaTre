@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -46,13 +48,40 @@ fun LevelScreen(navController: NavController, viewModel: ToDoViewModel) {
     Scaffold(topBar = {
         TopAppBar(
             title = {
-                Box(modifier = Modifier.fillMaxWidth()){
-                    Image(painterResource(
-                        id = R.drawable.textlogo), contentDescription = "MyLogo",
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Spacer(modifier = Modifier.weight(1f)) // Add spacer to center the logo
+                    Box(
                         modifier = Modifier
-                            .size(100.dp)
-                            .align(Alignment.Center)
-                    )
+                            .padding(end = 16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.textlogo),
+                            contentDescription = "MyLogo",
+                            modifier = Modifier
+                                .size(100.dp)
+                                .align(Alignment.Center)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(35.dp))
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = colorResource(id = R.color.barbar),
+                                shape = RoundedCornerShape(16.dp)
+                            )
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        Text(
+                            text = "Points: ${viewModel.points.value}",
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            color = Color.White,
+                            style = TextStyle(fontSize = 16.sp)
+                        )
+                    }
                 }
             },
             backgroundColor = Color.White
@@ -82,7 +111,7 @@ fun LevelScreen(navController: NavController, viewModel: ToDoViewModel) {
                 ) {
                     Text(
                         text = levelNames[currentLevel],
-                        style = TextStyle(fontSize = 48.sp, fontWeight = FontWeight.Bold, color = Color(R.color.barbar))
+                        style = TextStyle(fontSize = 48.sp, fontWeight = FontWeight.Bold, color = colorResource(id = R.color.barbar))
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(

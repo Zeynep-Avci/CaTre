@@ -27,4 +27,17 @@ class ToDoViewModel : ViewModel() {
         _checkedStates.clear()
         _checkedStates.addAll(newStates)
     }
+
+    private val _points = mutableStateOf(0)
+    val points: State<Int> = _points
+
+    fun incrementPoints() {
+        _points.value += 1
+    }
+
+    fun decrementPoints() {
+        if (_points.value > 0) {
+            _points.value -= 1
+        }
+    }
 }
